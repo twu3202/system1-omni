@@ -24,8 +24,9 @@ pub struct Executor {
     language: Model,
     heads: Heads,
     calibration: Calibration,
-    /// The state after the request's prefix and after a question's text; reused across
-    /// requests and grown as needed.
+    /// Buffers for the state after the request's prefix and after a question's text. Each
+    /// request or question that uses one captures it again; only the allocations outlive a
+    /// request, grown as needed.
     request: Option<PrefixState>,
     question: Option<PrefixState>,
 }
